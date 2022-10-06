@@ -18,8 +18,12 @@ exports = module.exports = function(io){
 
         // return a promise of a particluar stock price
         const getStockPricePromise = async(stockSymbol)=>{
+            // localhost data 
+            // const finnhub=`http://localhost:3005/api/stockLivePrice?stock=${stockSymbol}`;
+            // mock data ver2
+            const finnhub=`https://stock-tracker-mock.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
             // mock data
-            const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
+            // const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
             // live data
             // const finnhub=`https://finnhub.io/api/v1/quote?symbol=${stockSymbol}&token=${process.env.STOCK_INFO_FINNHUB_API_KEY}`;
             const finnhubRes=await fetch(finnhub);
@@ -33,7 +37,7 @@ exports = module.exports = function(io){
             return setTimeout(async() => {
                 if(!stopTimer){
                     console.log('timer set');
-                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Pacific/Honolulu' });
                     // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     const newYorkTime = new Date(newYorkDate);
                     // for debugging purposes
@@ -69,9 +73,9 @@ exports = module.exports = function(io){
         // server listens on socket line startStreamServerStockPrice and establishes a recurrent connection
         // that sends the current stock price of a particular stock and the time of each price concurrently
         // each 5 minutes in an hour
-        socket.on('startStreamServerStockPrice',({stockSymbol})=>{
-            console.log('this is the stock symbol'+stockSymbol);
-            const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+        socket.on('startStreamServerStockPrice',({tickerSymbol})=>{
+            console.log('this is the stock symbol'+tickerSymbol);
+            const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Pacific/Honolulu' });
             // New York Time
             // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
             const newYorkTime = new Date(newYorkDate);
@@ -87,7 +91,7 @@ exports = module.exports = function(io){
                         // console.log('not valid');
                     }
                     else{
-                        timer = setTimer(stockSymbol);
+                        timer = setTimer(tickerSymbol);
                     }
                 }
                 else{
@@ -105,7 +109,7 @@ exports = module.exports = function(io){
             return setTimeout(async() => {
                 if(!stopWatchListPriceConnection){
 
-                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Pacific/Honolulu' });
                     // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     const newYorkTime = new Date(newYorkDate);
                     // const newYorkTime = new Date();
@@ -122,8 +126,12 @@ exports = module.exports = function(io){
                         console.log('1 min have passed')
                         for(let i=0; i<stocks.length;i++){
                             let stockSymbol=stocks[i].stockSymbol;
+                            // localhost data
+                            // const finnhub=`http://localhost:3005/api/stockLivePrice?stock=${stockSymbol}`;
+                            // mock data ver2
+                            const finnhub=`https://stock-tracker-mock.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                             // mock data
-                            const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
+                            // const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                             // live data
                             // const finnhub=`https://finnhub.io/api/v1/quote?symbol=${stockSymbol}&token=${process.env.STOCK_INFO_FINNHUB_API_KEY}`;
                             const finnhubRes=await fetch(finnhub);
@@ -145,7 +153,7 @@ exports = module.exports = function(io){
         // server listens on socket line serverWatchlistPriceSteam and returns stocks liveprices
         socket.on('serverWatchlistPriceSteam',async ({stocks})=>{
              // New York Time
-             const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+             const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Pacific/Honolulu' });
             //  const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
              const newYorkTime = new Date(newYorkDate);
              let hour = newYorkTime.getHours();
@@ -160,8 +168,12 @@ exports = module.exports = function(io){
                             // console.log('not valid');
                             for(let i=0; i<stocks.length;i++){
                                 let stockSymbol=stocks[i].stockSymbol;
+                                // localhost data
+                                // const finnhub=`http://localhost:3005/api/stockLivePrice?stock=${stockSymbol}`;
+                                // mock data ver2
+                                const finnhub=`https://stock-tracker-mock.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                                 // mock data
-                                const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
+                                // const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                                 // live data
                                 // const finnhub=`https://finnhub.io/api/v1/quote?symbol=${stockSymbol}&token=${process.env.STOCK_INFO_FINNHUB_API_KEY}`;
                                 const finnhubRes=await fetch(finnhub);
@@ -183,8 +195,12 @@ exports = module.exports = function(io){
                      console.log('too late');
                      for(let i=0; i<stocks.length;i++){
                         let stockSymbol=stocks[i].stockSymbol;
+                        // localhost data
+                        // const finnhub=`http://localhost:3005/api/stockLivePrice?stock=${stockSymbol}`;
+                        // mock data ver2
+                        const finnhub=`https://stock-tracker-mock.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                         // mock data
-                        const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
+                        // const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
                         // live data
                         // const finnhub=`https://finnhub.io/api/v1/quote?symbol=${stockSymbol}&token=${process.env.STOCK_INFO_FINNHUB_API_KEY}`;
                         const finnhubRes=await fetch(finnhub);
@@ -204,17 +220,21 @@ exports = module.exports = function(io){
         });
 
         // server listens on socket line serverStockPrice and returns stock, stockPrice
-        socket.on('serverStockPrice',async ({stockSymbol})=>{
+        socket.on('serverStockPrice',async ({tickerSymbol})=>{
             console.log('serverStockPrice~!');
+            // localhost data
+            // const finnhub=`http://localhost:3005/api/stockLivePrice?stock=${tickerSymbol}`;
+            // mock data ver2
+            const finnhub=`https://stock-tracker-mock.herokuapp.com/api/stockLivePrice?stock=${tickerSymbol}`;
             // mock data
-            const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
+            // const finnhub=`https://mockstockapi.herokuapp.com/api/stockLivePrice?stock=${stockSymbol}`;
             // live data
             // const finnhub=`https://finnhub.io/api/v1/quote?symbol=${stockSymbol}&token=${process.env.STOCK_INFO_FINNHUB_API_KEY}`;
             const finnhubRes=await fetch(finnhub);
             const finnStockPriceData=await finnhubRes.json();
             // console.log('price'+finnStockPriceData.c);
             // mock data
-            socket.emit('clientStockPrice',{stockSymbol, stockPrice:finnStockPriceData.price});
+            socket.emit('clientStockPrice',{tickerSymbol, stockPrice:finnStockPriceData.price});
             // live data
             // socket.emit('clientStockPrice',{stockSymbol, stockPrice:finnStockPriceData.c});
         });
