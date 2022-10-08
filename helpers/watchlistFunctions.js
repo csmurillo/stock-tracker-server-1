@@ -27,7 +27,7 @@ exports.watchlistTrackSingleStock= (socket,stockSymbol,stockPrice)=>{
                             datePriceTargetReached:stocks[i].datePriceTargetReached
                         };
                         // 
-                        const stockHistoryRes=fetch(`http://localhost:3003/api/add/to/stock/history?owner=${watchList.owner}`, {
+                        const stockHistoryRes=fetch(`https://stocktracker-demo-backend.herokuapp.com/api/add/to/stock/history?owner=${watchList.owner}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ exports.watchlistTrackSingleStock= (socket,stockSymbol,stockPrice)=>{
                             datePriceTargetReached:stocks[i].datePriceTargetReached
                         };
                         // 
-                        const stockHistoryRes=fetch(`http://localhost:3003/api/add/to/stock/history?owner=${watchList.owner}`, {
+                        const stockHistoryRes=fetch(`https://stocktracker-demo-backend.herokuapp.com/api/add/to/stock/history?owner=${watchList.owner}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
