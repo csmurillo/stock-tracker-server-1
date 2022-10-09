@@ -12,7 +12,7 @@ dotenv.config();
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: "https://stock-tracker-demo.netlify.app",
+        origin: "http://localhost:3000/",
     },
 });
 
