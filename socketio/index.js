@@ -37,7 +37,7 @@ exports = module.exports = function(io){
             return setTimeout(async() => {
                 if(!stopTimer){
                     console.log('timer set');
-                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     const newYorkTime = new Date(newYorkDate);
                     // for debugging purposes
@@ -75,7 +75,7 @@ exports = module.exports = function(io){
         // each 5 minutes in an hour
         socket.on('startStreamServerStockPrice',({tickerSymbol})=>{
             console.log('this is the stock symbol'+tickerSymbol);
-            const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+            const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
             // New York Time
             // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
             const newYorkTime = new Date(newYorkDate);
@@ -109,7 +109,7 @@ exports = module.exports = function(io){
             return setTimeout(async() => {
                 if(!stopWatchListPriceConnection){
 
-                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+                    const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     // const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
                     const newYorkTime = new Date(newYorkDate);
                     // const newYorkTime = new Date();
@@ -153,7 +153,7 @@ exports = module.exports = function(io){
         // server listens on socket line serverWatchlistPriceSteam and returns stocks liveprices
         socket.on('serverWatchlistPriceSteam',async ({stocks})=>{
              // New York Time
-             const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+             const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
             //  const newYorkDate = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
              const newYorkTime = new Date(newYorkDate);
              let hour = newYorkTime.getHours();
